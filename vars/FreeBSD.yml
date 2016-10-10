@@ -14,5 +14,5 @@
 # limitations under the License.
 
 ---
-mariadb_package_name: mysql56-server-5.6.30
+mariadb_package_name: mysql56-server
 mariadb_service_name: mysql-server

@@ -23,6 +23,11 @@
 - name: Install package dependencies
   include: '{{ ansible_os_family }}.yml'
 
+- name: Start the MariaDB server service
+  service: name={{ mariadb_service_name }}
+           state=started
+           enabled=yes
+
 - name: Ensure specified databases are created
   mysql_db: name={{ item.key }}
             collation={{ item.value.collation | default('utf8_unicode_ci') }}
@@ -36,8 +41,3 @@
               priv={{ item.value.priv }}
               state={{ item.value.state | default('present') }}
   with_dict: '{{ mariadb_users }}'
-
-- name: Start the MariaDB server service
-  service: name={{ mariadb_service_name }}
-           state=started
-           enabled=yes
